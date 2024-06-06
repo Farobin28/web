@@ -7,14 +7,21 @@ body {
 }
 
 .title {
-  text-align: center;
-  margin-top: 50px;
+  display: flex;
   color: #007bff;
+  height: 10vh;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu {
   background-color: #0056b3; /* Темніший синій для кращого контрасту */
-  padding: 18px 0;
+  height: 5vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-list {
@@ -22,6 +29,7 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  display: flex;
 }
 
 .menu-item {
@@ -60,6 +68,10 @@ body {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+}
+
+.event-table tr {
+  border: 2px solid black;
 }
 
 .event-heading {
@@ -150,7 +162,13 @@ body {
 
 .map-container {
   text-align: center;
-  margin-top: 20px;
+  height: 85vh;
+  width: 100%;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
 }
 
 /* lion */
@@ -239,26 +257,30 @@ body {
 }
 html {
   height: 100%;
-  overflow: hidden;
 }
 body {
   margin: 0;
   padding: 0;
   perspective: 1px;
   transform-style: preserve-3d;
-  overflow-y: scroll;
+
   overflow-x: hidden;
   font-family: "Amatic SC", cursive;
 }
 header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
-  min-height: 100vh;
+  height: 95vh;
   text-align: center;
-  padding-top: 20%;
   transform-style: inherit;
   width: 100vw;
+  background-image: url("/HeroPug.webp");
+  background-size: cover;
+  color: white;
 }
-header::before {
+/* header::before {
   content: "";
   display: block;
   position: absolute;
@@ -269,13 +291,70 @@ header::before {
   z-index: -1;
   transform-origin: center;
   min-height: 100vh;
-  background-image: url("/HeroPug.webp");
+
   background-repeat: no-repeat;
   background-size: cover;
   transition: 1s;
   transform: translateZ(-1px) scale(2);
-}
+} */
 header h1 {
-  margin-top: -100px;
   font-size: 42px;
+  margin: 0;
+}
+
+.blur {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Set the background color with transparency */
+  backdrop-filter: blur(5px); /* Apply the blur effect */
+  padding: 20px 0;
+  border-radius: 30px;
+}
+
+@media screen and (max-width: 666px) {
+  .menu {
+    height: 20vh;
+    font-size: 1.2rem;
+  }
+  .first-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  .second-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+  header {
+    height: 80vh;
+  }
+  .map-container {
+    height: 70vh;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .event-table {
+    width: 90%;
+  }
+
+  .event-table th,
+  .event-table td {
+    display: block;
+    padding: 0.5rem;
+    text-align: center;
+  }
+}
+
+iframe[src*="youtube"] {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-bottom: 10px;
 }
