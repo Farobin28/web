@@ -1,30 +1,29 @@
-window.onscroll = function () {
-  const scrollBtn = document.getElementById("scrollBtn");
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    scrollBtn.style.display = "block";
-  } else {
-    scrollBtn.style.display = "none";
-  }
-};
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const ticketRoute = require("./routes/tickets.route.js");
+const app = express();
+app.use(cors());
 
-function scrollToTop() {
-    window.scroll({
-      top: 0, 
-      behavior: "smooth",
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/api/ticket", ticketRoute);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+mongoose
+  .connect(
+    "mongodb+srv://artemfarobin:XV3djnoLNUC288vq@web.znxgdpw.mongodb.net/?retryWrites=true&w=majority&appName=Web"
+  )
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(3000, () => {
+      console.log("Server started on port 3000");
     });
-}
-
-function displayRealTime() {
-  const currentTime = new Date();
-  const hours = currentTime.getHours().toString().padStart(2, '0');
-  const minutes = currentTime.getMinutes().toString().padStart(2, '0');
-  const seconds = currentTime.getSeconds().toString().padStart(2, '0');
-  const timeString = hours + ":" + minutes + ":" + seconds;
-  
-  const timeElement = document.getElementById("realTime");
-  timeElement.textContent = timeString;
-}
-
-setInterval(displayRealTime, 1000);
-
-displayRealTime();
+  })
+  .catch(() => {
+    console.log("Connection failed");
+  });
